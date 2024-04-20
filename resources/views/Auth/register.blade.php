@@ -1,79 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>SB Admin 2 - Register</title>
-  <!-- Custom fonts for this template-->
-  <link href="{{ asset('admin_asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  
-  <!-- Custom styles for this template-->
-  <link href="{{ asset('admin_asset/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mazer Admin Dashboard</title>
+    <link rel="stylesheet" href="assets/css/main/app.css">
+    <link rel="stylesheet" href="assets/css/pages/auth.css">
+    <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/images/logo/favicon.png" type="image/png">
 </head>
-<body class="bg-gradient-primary">
-  <div class="container">
-    <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
-        <!-- Nested Row within Card Body -->
-        <div class="row">
-          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-          <div class="col-lg-7">
-            <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Register</h1>
-              </div>
-              <form action="{{ route('register.save') }}" method="POST" class="user">
-                @csrf
-                <div class="form-group">
-                  <input name="name" type="text" class="form-control form-control-user @error('name')is-invalid @enderror" id="exampleInputName" placeholder="Name">
-                  @error('name')
-                    <span class="invalid-feedback">{{ $message }}</span>
-                  @enderror
-                </div>
-                <div class="form-group">
-                  <input name="email" type="email" class="form-control form-control-user @error('email')is-invalid @enderror" id="exampleInputEmail" placeholder="Email Address">
-                  @error('email')
-                    <span class="invalid-feedback">{{ $message }}</span>
-                  @enderror
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input name="password" type="password" class="form-control form-control-user @error('password')is-invalid @enderror" id="exampleInputPassword" placeholder="Password">
-                    @error('password')
-                      <span class="invalid-feedback">{{ $message }}</span>
-                    @enderror
-                  </div>
-                  <div class="col-sm-6">
-                    <input name="password_confirmation" type="password" class="form-control form-control-user @error('password_confirmation')is-invalid @enderror" id="exampleRepeatPassword" placeholder="Repeat Password">
-                    @error('password_confirmation')
-                      <span class="invalid-feedback">{{ $message }}</span>
-                    @enderror
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
-              </form>
-              <hr>
-              <div class="text-center">
-                <a class="small" href="{{ route('login') }} ">Already have an account? Login!</a>
-              </div>
+
+<body>
+    <div id="auth">
+        
+<div class="row h-100">
+    <div class="col-lg-5 col-12">
+        <div id="auth-left">
+            <div class="auth-logo">
+                <a href="{{ route('login') }} "><img src="assets/images/logo/logo.svg" alt="Logo"></a>
             </div>
-          </div>
+            <h1 class="auth-title">Sign Up</h1>
+            <p class="auth-subtitle mb-5">Input your data to register to our website.</p>
+
+          <form action="{{ route('register.save') }}" method="POST" class="user">
+    @csrf <!-- Menambahkan token CSRF -->
+    <div class="form-group position-relative has-icon-left mb-4">
+        <input type="text" name="name" class="form-control form-control-xl" placeholder="Name"> <!-- Menambahkan atribut name -->
+        <div class="form-control-icon">
+            <i class="bi bi-person"></i>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- Bootstrap core JavaScript-->
-  <script src="{{ asset('admin_asset/vendor/jquery/jquery.min.js') }}"></script>
-  <script src="{{ asset('admin_asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  
-  <!-- Core plugin JavaScript-->
-  <script src="{{ asset('admin_asset/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-  
-  <!-- Custom scripts for all pages-->
-  <script src="{{ asset('admin_asset/js/sb-admin-2.min.js') }}"></script>
+    <div class="form-group position-relative has-icon-left mb-4">
+        <input type="text" name="email" class="form-control form-control-xl" placeholder="Email"> <!-- Menambahkan atribut name -->
+        <div class="form-control-icon">
+            <i class="bi bi-envelope"></i>
+        </div>
+    </div>
+    <div class="form-group position-relative has-icon-left mb-4">
+        <input type="password" name="password" class="form-control form-control-xl" placeholder="Password"> <!-- Menambahkan atribut name -->
+        <div class="form-control-icon">
+            <i class="bi bi-shield-lock"></i>
+        </div>
+    </div>
+    <div class="form-group position-relative has-icon-left mb-4">
+        <input type="password" name="password_confirmation" class="form-control form-control-xl" placeholder="Confirm Password"> <!-- Menambahkan atribut name -->
+        <div class="form-control-icon">
+            <i class="bi bi-shield-lock"></i>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Sign Up</button>
+</form>
+
+            <div class="text-center mt-5 text-lg fs-4">
+                <p class='text-gray-600'>Already have an account? <a href="{{ route('login') }} " class="font-bold">Log
+                        in</a>.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7 d-none d-lg-block">
+        <div id="auth-right">
+
+        </div>
+    </div>
+</div>
+
+    </div>
 </body>
+
 </html>
