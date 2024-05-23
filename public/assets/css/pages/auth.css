@@ -7,7 +7,7 @@ body {
 }
 #auth #auth-right {
     background: url(../../../assets/faces/9.png?45649b87e0b3f50bfa1372c6cdb4595f),
-        linear-gradient(90deg, #2d499d, #3f5491);
+        linear-gradient(90deg, #cf0723, #e51f39);
     height: 100%;
 }
 #auth #auth-left {
@@ -40,5 +40,12 @@ body {
 }
 body.theme-dark #auth-right {
     background: url(../../../assets/images/4853433.png?45649b87e0b3f50bfa1372c6cdb4595f),
-        linear-gradient(90deg, #2d499d, #3f5491);
+        linear-gradient(90deg, #cf0723, #e51f39);
+}
+.btn {
+    background-color: #cf0723 !important;
+    border-color: #cf0723 !important;
+}
+.custom-bg {
+    background-color: #cf0723 !important;
 }

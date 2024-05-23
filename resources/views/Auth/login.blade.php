@@ -1,62 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Go To School</title>
-    <link rel="stylesheet" href="assets/css/main/app.css">
-    <link rel="stylesheet" href="assets/css/pages/auth.css">
-    <link rel="shortcut icon" href="assets/images/logo/favicon.svg" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/images/logo/favicon.png" type="image/png">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login - Go School</title>
+        <link rel="stylesheet" href="assets/css/main/app.css">
+        <link rel="stylesheet" href="assets/css/pages/auth.css">
+        <link rel="shortcut icon" href="{{ asset('src/assets/favicon.ico')}}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('src/assets/favicon.ico')}}" type="image/png">
+    </head>
+    <body>
+        <form action="{{ route('login_auth') }}" method="POST" class="User">
+            @csrf <!-- Tambahkan tag @csrf untuk CSRF protection -->
+            <section class="vh-100">
+            <div class="container-fluid h-custom">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="src/assets/logo.png" class="img-fluid" alt="Sample image">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                    <p class="lead fw-normal mb-0 me-3"> Login dengan </p>
+                    <button type="button" class="btn btn-primary btn-floating mx-1">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
 
-<body>
-    <div id="auth">
-        <div class="row h-100">
-            <div class="col-lg-5 col-12">
-                <div id="auth-left">
-                    <div class="auth-logo">
-                        <a href="{{ route('login') }}"><img src="assets/images/logo/logo.svg" alt="Logo"></a>
+                    <button type="button" class="btn btn-primary btn-floating mx-1">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-primary btn-floating mx-1">
+                        <i class="fab fa-linkedin-in"></i>
+                    </button>
                     </div>
-                    <h1 class="auth-title">Log in.</h1>
-                    <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
 
-                    <form action="{{ route('login_auth') }}" method="POST" class="User">
-                        @csrf <!-- Tambahkan tag @csrf untuk CSRF protection -->
+                    <div class="divider d-flex align-items-center my-4">
+                    <p class="text-center fw-bold mx-3 mb-0">Atau</p>
+                    </div>
+
+                    <!-- Email input -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="email" class="form-control form-control-xl" placeholder="email">
-                            <div class="form-control-icon">
-                                <i class="bi bi-person"></i>
+                                <input type="text" name="email" class="form-control form-control-xl" placeholder="email">
+                                <div class="form-control-icon">
+                                    <i class="bi bi-person"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" name="password" class="form-control form-control-xl" placeholder="Password">
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
+                            <div class="form-group position-relative has-icon-left mb-4">
+                                <input type="password" name="password" class="form-control form-control-xl" placeholder="Password">
+                                <div class="form-control-icon">
+                                    <i class="bi bi-shield-lock"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-check form-check-lg d-flex align-items-end">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
-                                Keep me logged in
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">login</button>
-                    </form>
-                    <div class="text-center mt-5 text-lg fs-4">
-                        <p class="text-gray-600">Don't have an account? <a href="register" class="font-bold">Sign up</a>.</p>
-                        
+
+                    <div class="d-flex justify-content-between align-items-center">
+                    <!-- Checkbox -->
+                    <div class="form-check mb-0">
+                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                        <label class="form-check-label" for="form2Example3">
+                        Ingat saya
+                        </label>
+                    </div>
+                    <a href="#!" class="text-body">Lupa Password?</a>
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                    <button type="submit" class="btn btn-primary btn-lg"
+                        style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                    <p class="small fw-bold mt-2 pt-1 mb-0">Apakah belum memiliki akun? <a href="register"
+                        class="link-danger">Register</a></p>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right">
-
                 </div>
             </div>
-        </div>
-    </div>
-</body>
+            <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 custom-bg">
+                <!-- Copyright -->
+                <div class="text-white mb-3 mb-md-0">
+                Copyright © 2020. Ilham Hadi Developer.
+                </div>
+                <!-- Right -->
+                <div>
+                <a href="#!" class="text-white me-4">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#!" class="text-white me-4">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#!" class="text-white me-4">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="#!" class="text-white">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                </div>
+            </div>
+            </section>
+        </form>
+    </body>
 
-</html>
+    </html>

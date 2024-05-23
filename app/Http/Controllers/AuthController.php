@@ -11,6 +11,11 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    public function index()
+    {
+        return view('index');
+    }
+
     public function register()
     {
         return view('auth.register'); // Perbaikan penulisan view

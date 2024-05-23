@@ -14,14 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/greeting', function () {
-    return 'Hello World';
-});
+Route::view('/', 'index');
 
 // Menyediakan rute untuk tampilan register dan dash
 Route::view('/register', 'auth/register');
 Route::view('/dash', 'dash');
-Route::view('/forgot-pw', 'forgot-pw');
 
 // Menggunakan rute eksplisit untuk setiap metode dalam AuthController
 Route::get('/register', [AuthController::class, 'register'])->name('register');
