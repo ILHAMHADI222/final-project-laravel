@@ -40,7 +40,7 @@
             <div class="container px-4 px-lg-5 h-100">
                 <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">Pilih Lah Sekolah Menengah Kejuruan Mu Sekarang !</h1>
+                        <h1 class="text-white font-weight-bold">Pilih Sekolah Menengah Kejuruan Mu Sekarang !</h1>
                         <hr class="divider" />
                     </div>
                     <div class="col-lg-8 align-self-baseline">
@@ -61,7 +61,7 @@
                             Tak Perlu khawatir Untuk Memilih SMK mu Lagi</h2>
                         <hr class="divider divider-light" />
                         <p class="text-white-75 mb-4">Back To School atau sering dikenal dengan Back school adalah layanan sistem pendukung keputusan untuk memilih SMK swasta terbaik di kota tegal dengan menggunakan metode TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution)</p>
-                        <a class="btn btn-light btn-xl" href="#services">Mulai Sekarang</a>
+                        <a class="btn btn-light btn-xl" href="{{ route('login') }}">Mulai Sekarang</a>
                     </div>
                 </div>
             </div>
@@ -120,94 +120,25 @@
 
         <!-- Portfolio-->
         <div id="portfolio">
-        <h2 class="text-center mt-0">Daftar Sekolah Menengah Kejuruan Swasta</h2>
-        <hr class="divider" />
-            <div class="container-fluid p-0">
-                <div class="row g-0">
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{{ asset('src/assets/img/portfolio/fullsize/1.png')}}" title="SMK HARAPAN BERSAMA TEGAL">
-                         <img class="img-fluid" src="{{ asset('src/assets/img/portfolio/thumbnails/1.png')}}" alt="..." />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">GO SCHOOL</div>
-                                <div class="project-name">SMK HARAPAN BERSAMA TEGAL</div>
-                            </div>
-                        </a>
+    <h2 class="text-center mt-0">Daftar Sekolah Menengah Kejuruan Swasta</h2>
+    <hr class="divider" />
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            @foreach($portfolios as $portfolio)
+            <div class="col-lg-4 col-sm-6">
+                <a class="portfolio-box" href="{{ $portfolio->link_image }}" title="{{ $portfolio->nama_sekolah }}">
+                    <img class="img-fluid" src="{{ $portfolio->link_image }}" alt="{{ $portfolio->nama_sekolah }}" />
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">GO SCHOOL</div>
+                        <div class="project-name">{{ $portfolio->nama_sekolah }}</div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{{asset('src/assets/img/portfolio/fullsize/2.png')}}" title="SMK YPT TEGAL">
-                            <img class="img-fluid" src="{{asset('src/assets/img/portfolio/thumbnails/2.png')}}" alt="..." />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">GO SCHOOL</div>
-                                <div class="project-name">SMK YPT TEGAL</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{{asset('src/assets/img/portfolio/fullsize/3.png')}}" title="SMK BAHARI TEGAL">
-                            <img class="img-fluid" src="{{asset('src/assets/img/portfolio/thumbnails/3.png')}}" alt="..." />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">GO SCHOOL</div>
-                                <div class="project-name">SMK BAHARI TEGAL</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{{asset('src/assets/img/portfolio/fullsize/4.png')}}" title="SMK AL-IRSYAD TEGAL">
-                            <img class="img-fluid" src="{{asset('src/assets/img/portfolio/thumbnails/4.png')}}" alt="..." />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">GO SCHOOL</div>
-                                <div class="project-name">SMK AL-IRSYAD TEGAL</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{{asset('src/assets/img/portfolio/fullsize/5.png')}}" title="SMK ISHANIYAH TEGAL">
-                            <img class="img-fluid" src="{{asset('src/assets/img/portfolio/thumbnails/5.png')}}" alt="..." />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">GO SCHOOL</div>
-                                <div class="project-name">SMK ISHANIYAH</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{{asset('src/assets/img/portfolio/fullsize/6.png')}}" title="SMK AL-IKHLAS TEGAL">
-                            <img class="img-fluid" src="{{asset('src/assets/img/portfolio/thumbnails/6.png')}}" alt="..." />
-                            <div class="portfolio-box-caption p-3">
-                                <div class="project-category text-white-50">GO SCHOOL</div>
-                                <div class="project-name">SMK AL-IKHLAS TEGAL</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{{asset('src/assets/img/portfolio/fullsize/7.png')}}" title="SMK DINAMIKA TEGAL">
-                            <img class="img-fluid" src="{{asset('src/assets/img/portfolio/thumbnails/7.png')}}" alt="..." />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">GO SCHOOL</div>
-                                <div class="project-name">SMK DINAMIKA TEGAL</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{{asset('src/assets/img/portfolio/fullsize/8.png')}}" title="SMK MUHAMMADIYAH 1 TEGAL">
-                            <img class="img-fluid" src="{{asset('src/assets/img/portfolio/thumbnails/8.png')}}" alt="..." />
-                            <div class="portfolio-box-caption">
-                                <div class="project-category text-white-50">GO SCHOOL</div>
-                                <div class="project-name">SMK MUHAMMADIYAH 1 TEGAL</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="{{asset('src/assets/img/portfolio/fullsize/9.png')}}" title="SMK ASTRINDO TEGAL">
-                            <img class="img-fluid" src="{{asset('src/assets/img/portfolio/thumbnails/9.png')}}" alt="..." />
-                            <div class="portfolio-box-caption p-3">
-                                <div class="project-category text-white-50">GO SCHOOL</div>
-                                <div class="project-name">SMK ASTRINDO TEGAL</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                </a>
             </div>
+            @endforeach
         </div>
+    </div>
+</div>
+
         <!-- Contact-->
         <section class="page-section" id="contact">
             <div class="container px-4 px-lg-5">

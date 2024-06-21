@@ -2,18 +2,108 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPasswordMail;
+use App\Models\PasswordReset;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Perbaikan penulisan fasad Auth
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    public function user()
+    {
+        return view('user.dashboard'); // Pastikan Anda memiliki view untuk user
+    }
+
     public function index()
     {
         return view('index');
+    }
+
+    public function forgot_password()
+    {
+        return view('auth.forgot-password');
+    }
+
+    public function forgot_password_act(Request $request)
+    {
+        $customMessage = [
+            'email.required' => ' Peringatan!: Email tidak boleh kosong',
+            'email.email' => 'Peringatan!: Email tidak valid',
+            'email.exists' => 'Peringatan!: Mohon masukan email anda dengan benar',
+        ];
+
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ], $customMessage);
+
+        $token = \Str::random(60);
+
+        PasswordReset::updateOrCreate(
+            [
+                'email' => $request->email,
+            ],
+            [
+                'email' => $request->email,
+                'token' => $token,
+                'created_at' => now(),
+            ]
+        );
+
+        Mail::to($request->email)->send(new ResetPasswordMail($token));
+
+        return redirect()->route('forgot-password')->with('success', 'Kami telah mengirimkan link reset password ke email anda');
+    }
+
+    public function validasi_forgot_password_act(Request $request)
+    {
+        $customMessage = [
+            'password.required' => 'Password tidak boleh kosong',
+            'password.min' => 'Password minimal 6 karakter',
+        ];
+
+        $request->validate([
+            'password' => 'required|min:6',
+        ], $customMessage);
+
+        $token = PasswordReset::where('token', $request->token)->first();
+
+        if (!$token) {
+            return redirect()->route('login')->with('failed', 'Token tidak valid');
+        }
+
+        $user = User::where('email', $token->email)->first();
+
+        if (!$user) {
+            return redirect()->route('login')->with('failed', 'Email tidak terdaftar di database');
+        }
+
+        $user->update([
+            'password' => Hash::make($request->password),
+            'password_changed_at' => now(),
+        ]);
+
+        $token->delete();
+
+        // Langsung login user setelah password direset
+        Auth::login($user);
+
+        return redirect()->route('dash')->with('success', 'Password berhasil direset dan Anda telah login.');
+    }
+
+    public function validasi_forgot_password(Request $request, $token)
+    {
+        $getToken = PasswordReset::where('token', $token)->first();
+
+        if (!$getToken) {
+            return redirect()->route('login')->with('failed', 'Token tidak valid');
+        }
+
+        return view('auth.validasi-token', compact('token'));
     }
 
     public function register()
@@ -23,20 +113,28 @@ class AuthController extends Controller
 
     public function registerSave(Request $request)
     {
-        Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
-        ])->validate();
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed|min:6',
+        ]);
 
-        User::create([
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'level' => 'Admin',
+            'role' => 'user',
         ]);
 
-        return redirect()->route('login');
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect()->route('verification.notice');
     }
 
     public function login()
@@ -46,25 +144,28 @@ class AuthController extends Controller
 
     public function login_auth(Request $request) // Perbaikan penamaan metode
     {
-        Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required',
-        ])->validate();
+        $credentials = $request->only('email', 'password');
 
-        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-            throw ValidationException::withMessages(['email' => trans('auth.failed')]);
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            if (Auth::user()->role == 'admin') {
+                return redirect()->route('dash');
+            } else {
+                return redirect()->route('user');
+            }
         }
 
-        $request->session()->regenerate();
-
-        return redirect()->route('dash');
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     public function logout(Request $request)
     {
-        Auth::logout(); // Perbaikan pemanggilan metode logout
-
+        Auth::logout();
         $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect('/');
     }

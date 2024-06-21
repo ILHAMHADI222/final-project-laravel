@@ -7,95 +7,104 @@
         <title>Login - Go School</title>
         <link rel="stylesheet" href="assets/css/main/app.css">
         <link rel="stylesheet" href="assets/css/pages/auth.css">
-        <link rel="shortcut icon" href="{{ asset('src/assets/favicon.ico')}}" type="image/x-icon">
-        <link rel="shortcut icon" href="{{ asset('src/assets/favicon.ico')}}" type="image/png">
+        <link rel="shortcut icon" href="{{ asset('src/assets/favicon.ico') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('src/assets/favicon.ico') }}" type="image/png">
     </head>
+
     <body>
         <form action="{{ route('login_auth') }}" method="POST" class="User">
             @csrf <!-- Tambahkan tag @csrf untuk CSRF protection -->
             <section class="vh-100">
-            <div class="container-fluid h-custom">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="src/assets/logo.png" class="img-fluid" alt="Sample image">
-                </div>
-                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                    <p class="lead fw-normal mb-0 me-3"> Login dengan </p>
-                    <button type="button" class="btn btn-primary btn-floating mx-1">
-                        <i class="fab fa-facebook-f"></i>
-                    </button>
+                <div class="container-fluid h-custom">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-md-9 col-lg-6 col-xl-5">
+                            <img src="src/assets/logo.png" class="img-fluid" alt="Sample image">
+                        </div>
+                        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                            </div>
 
-                    <button type="button" class="btn btn-primary btn-floating mx-1">
-                        <i class="fab fa-twitter"></i>
-                    </button>
+                            <div class="divider d-flex align-items-center my-4">
+                                <h4 class="text-center fw-bold mx-3 mb-0">Sign In</h4>
+                            </div>
 
-                    <button type="button" class="btn btn-primary btn-floating mx-1">
-                        <i class="fab fa-linkedin-in"></i>
-                    </button>
-                    </div>
-
-                    <div class="divider d-flex align-items-center my-4">
-                    <p class="text-center fw-bold mx-3 mb-0">Atau</p>
-                    </div>
-
-                    <!-- Email input -->
-                        <div class="form-group position-relative has-icon-left mb-4">
+                            <!-- Email input -->
+                            <div class="form-group position-relative has-icon-left mb-4">
                                 <input type="text" name="email" class="form-control form-control-xl" placeholder="email">
                                 <div class="form-control-icon">
                                     <i class="bi bi-person"></i>
                                 </div>
                             </div>
-                            <div class="form-group position-relative has-icon-left mb-4">
-                                <input type="password" name="password" class="form-control form-control-xl" placeholder="Password">
+                            <div class="form-group position-relative has-icon-left mb-4 password-container">
+                                <input type="password" name="password" id="password" class="form-control form-control-xl" placeholder="Password">
                                 <div class="form-control-icon">
                                     <i class="bi bi-shield-lock"></i>
                                 </div>
+                                <i class="bi bi-eye-slash password-toggle" id="togglePassword"></i>
                             </div>
 
-                    <div class="d-flex justify-content-between align-items-center">
-                    <!-- Checkbox -->
-                    <div class="form-check mb-0">
-                        <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                        <label class="form-check-label" for="form2Example3">
-                        Ingat saya
-                        </label>
-                    </div>
-                    <a href="#!" class="text-body">Lupa Password?</a>
-                    </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- Checkbox -->
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                                    <label class="form-check-label" for="form2Example3">
+                                        Ingat saya
+                                    </label>
+                                </div>
+                                <a href="{{ route('forgot-password') }}" class="text-body">Lupa Password?</a>
+                            </div>
 
-                    <div class="text-center text-lg-start mt-4 pt-2">
-                    <button type="submit" class="btn btn-primary btn-lg"
-                        style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                    <p class="small fw-bold mt-2 pt-1 mb-0">Apakah belum memiliki akun? <a href="register"
-                        class="link-danger">Register</a></p>
+                            <div class="text-center text-lg-start mt-4 pt-2">
+                                <div class="d-flex justify-content-center align-items-center my-3">
+                                    <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                                    <p class="text-center fw-bold mx-3 mb-0">Atau</p>
+                                    <a href="{{ route('google-auth') }}">
+                                        <button type="button" class="login-with-google-btn">Login with Google</button>
+                                    </a>
+                                </div>
+
+                                <p class="small fw-bold mt-2 pt-1 mb-0">Apakah belum memiliki akun? <a href="register" class="link-danger">Register</a></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 custom-bg">
+                    <!-- Copyright -->
+                    <div class="text-white mb-3 mb-md-0">
+                        Copyright © 2024. Ilham Hadi Developer.
+                    </div>
+                    <!-- Right -->
+                    <div>
+                        <a href="#!" class="text-white me-4">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#!" class="text-white me-4">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#!" class="text-white me-4">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#!" class="text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 custom-bg">
-                <!-- Copyright -->
-                <div class="text-white mb-3 mb-md-0">
-                Copyright © 2020. Ilham Hadi Developer.
-                </div>
-                <!-- Right -->
-                <div>
-                <a href="#!" class="text-white me-4">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#!" class="text-white me-4">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#!" class="text-white me-4">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="#!" class="text-white">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                </div>
-            </div>
             </section>
         </form>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const togglePassword = document.querySelector('#togglePassword');
+                const password = document.querySelector('#password');
+
+                togglePassword.addEventListener('click', function () {
+                    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                    password.setAttribute('type', type);
+                    this.classList.toggle('bi-eye');
+                    this.classList.toggle('bi-eye-slash');
+                });
+            });
+        </script>
     </body>
 
     </html>

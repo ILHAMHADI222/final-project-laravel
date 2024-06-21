@@ -13,22 +13,25 @@
   
   <!-- Nav Item - Dashboard -->
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('dashboard') }}">
+    <a class="nav-link" href="{{ route('dash') }}">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
   
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('products') }}">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Product</span></a>
-  </li>
-  
-  <li class="nav-item">
+    <li class="nav-item">
     <a class="nav-link" href="/profile">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Profile</span></a>
   </li>
+
+  <li class="nav-item">
+    <a href="/dashboard/user_dashboard" class="nav-link">
+        <i class="nav-icon fas fa-school"></i>
+        <p>
+            Manajemen Sekolah
+        </p>
+    </a>
+</li>
   
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
