@@ -69,7 +69,7 @@
         <!-- Services-->
         <section class="page-section" id="services">
     <div class="container px-4 px-lg-5">
-        <h2 class="text-center mt-0">Kriteria Yang Digunakan Pada Sistem Ini</h2>
+        <h2 class="text-center mt-0 fw-bold">Kriteria Yang Digunakan Pada Sistem Ini</h2>
         <hr class="divider" />
         
         <!-- First Row: 3 elements centered -->
@@ -120,7 +120,7 @@
 
         <!-- Portfolio-->
         <div id="portfolio">
-    <h2 class="text-center mt-0">Daftar Sekolah Menengah Kejuruan Swasta</h2>
+    <h2 class="text-center mt-0 fw-bold">Daftar Sekolah Menengah Kejuruan Swasta</h2>
     <hr class="divider" />
     <div class="container-fluid p-0">
         <div class="row g-0">
@@ -145,7 +145,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-lg-8 col-xl-6 text-center">
                         <hr class="divider" />
-                        <h2 class="mt-0">Raih SMK Terbaikmu Sekarang !</h2>
+                        <h2 class="mt-0 fw-bold">Raih SMK Terbaikmu Sekarang !</h2>
                         <hr class="divider" />
                         <p class="text-muted mb-5">Contact Us</p>
                     </div>

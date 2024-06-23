@@ -49,6 +49,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // Protect user dashboard route with 'auth' and 'verified' middleware
 Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     Route::get('/user', [SekolahController::class, 'index'])->name('user.index');
+    Route::get('/user/mulai_perhitungan', [SekolahController::class, 'mulaiPerhitungan'])->name('user.mulai_perhitungan');
 });
 
 // forgot-password

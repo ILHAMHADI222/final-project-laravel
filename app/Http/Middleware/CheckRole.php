@@ -2,11 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\Request; // Pastikan menggunakan Illuminate\Http\Request
 use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
-    public function handle($request, \Closure $next, $role)
+    public function handle(Request $request, \Closure $next, $role)
     {
         if (!Auth::check() || Auth::user()->role != $role) {
             return redirect('/');

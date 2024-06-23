@@ -2,10 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB; // Import DB facade jika belum di-import
+use App\Models\SekolahPlace;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; // Pastikan Anda mengimpor model Sekolah jika digunakan
 
 class SekolahController extends Controller
 {
+    public function mulaiPerhitungan(Request $request)
+    {
+        $selectedIds = $request->query('selectedIds');
+        $selectedIdsArray = explode(',', $selectedIds);
+
+        $selectedSchools = SekolahPlace::whereIn('id_sekolah', $selectedIdsArray)->get();
+
+        return view('user.mulai_perhitungan', compact('selectedSchools'));
+    }
+
     public function index()
     {
         // Mengambil semua data dari tabel 'sekolah_places' menggunakan query builder
