@@ -11,7 +11,7 @@
                 @else
                     @foreach($portfolios as $portfolio)
                         <div class="col-lg-4 col-md-6 mb-4">
-                            <div class="card h-100 shadow-sm" style="background-color: #CF0723; color: white;">
+                            <div class="card h-100 shadow-sm" style="background-color: #F98B88; color: white;">
                                 <a href="{{ $portfolio->link_image }}" title="{{ $portfolio->nama_sekolah }}">
                                     <img class="card-img-top img-fluid" src="{{ $portfolio->link_image }}" alt="{{ $portfolio->nama_sekolah }}">
                                 </a>
@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="container mt-4">
+    <div class="container mt-4" style="margin-bottom: 2rem; padding-bottom: 1rem;">
         <form id="selectSchoolsForm" action="/user/mulai_perhitungan" method="GET">
             @csrf
             <div class="text-center">

@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -82,6 +83,8 @@ class AuthController extends Controller
             return redirect()->route('login')->with('failed', 'Email tidak terdaftar di database');
         }
 
+        dd($user);
+
         $user->update([
             'password' => Hash::make($request->password),
             'password_changed_at' => now(),
@@ -89,10 +92,13 @@ class AuthController extends Controller
 
         $token->delete();
 
-        // Langsung login user setelah password direset
+        // Langsung login user setelah password diresetS
         Auth::login($user);
 
-        return redirect()->route('dash')->with('success', 'Password berhasil direset dan Anda telah login.');
+        // Regenerasi sesi
+        $request->session()->regenerate();
+
+        return redirect()->route('user')->with('success', 'Password berhasil direset dan Anda telah login.');
     }
 
     public function validasi_forgot_password(Request $request, $token)
@@ -142,14 +148,21 @@ class AuthController extends Controller
         return view('auth.login'); // Perbaikan penulisan view
     }
 
-    public function login_auth(Request $request) // Perbaikan penamaan metode
+    public function login_auth(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
+        // Debugging kredensial
+        Log::info('Kredensial: ', ['email' => $credentials['email'], 'password' => $credentials['password']]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            if (Auth::user()->role == 'admin') {
+            // Debugging peran pengguna
+            $userRole = Auth::user()->role;
+            Log::info('Peran Pengguna: ', ['role' => $userRole]);
+
+            if ($userRole == 'admin') {
                 return redirect()->route('dash');
             } else {
                 return redirect()->route('user');

@@ -13,7 +13,7 @@
             @else
                 @foreach($selectedSchools as $school)
                     <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="card h-100 shadow-sm" style="background-color: #CF0723; color: white;">
+                        <div class="card h-100 shadow-sm" style="background-color: #F98B88; color: white;">
                             <a href="{{ $school->link_image }}" title="{{ $school->nama_sekolah }}">
                                 <img class="card-img-top img-fluid" src="{{ $school->link_image }}" alt="{{ $school->nama_sekolah }}">
                             </a>
