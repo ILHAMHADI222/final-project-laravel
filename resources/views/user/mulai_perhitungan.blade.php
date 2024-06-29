@@ -1,31 +1,42 @@
 @extends('layouts.navbar')
-
 @extends('layouts.app')
 
 @section('content')
 <div id="portfolio">
-    <h2 class="text-center mt-4 fw-bold">Masukan Bobot Ke Sekola Yang Anda Pilih</h2>
+    <h2 class="text-center mt-4 fw-bold">Masukan Bobot Ke Sekolah Yang Anda Pilih</h2>
     <hr class="divider">
     <div class="container">
         <div class="row">
-            @if($selectedSchools->isEmpty())
-                <p class="text-center">Tidak ada sekolah yang dipilih</p>
-            @else
-                @foreach($selectedSchools as $school)
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="card h-100 shadow-sm" style="background-color: #F98B88; color: white;">
-                            <a href="{{ $school->link_image }}" title="{{ $school->nama_sekolah }}">
-                                <img class="card-img-top img-fluid" src="{{ $school->link_image }}" alt="{{ $school->nama_sekolah }}">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $school->nama_sekolah }}</h5>
-                                <p class="card-text">{{ $school->lokasi_sekolah }}</p>
-                                <a href="{{ $school->link_web }}" class="btn btn-primary" style="background-color: white; color: #CF0723;" title="Lihat Detail">Lihat Detail</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
+        @if($selectedSchools->isEmpty())
+    <p class="text-center">Tidak ada sekolah yang dipilih</p>
+@else
+    @foreach($selectedSchools as $school)
+        <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="card h-100 shadow-sm" style="background-color: #CF0723; color: white;">
+                <a href="{{ $school->link_image }}" title="{{ $school->nama_sekolah }}">
+                    <img class="card-img-top img-fluid" src="{{ $school->link_image }}" alt="{{ $school->nama_sekolah }}">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ $school->nama_sekolah }}</h5>
+                    <p class="card-text">{{ $school->lokasi_sekolah }}</p>
+
+                    <form action="{{ route('simpanJarak') }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="jarak_{{ $school->id_sekolah }}">Jarak</label>
+                                    <input type="number" name="jarak" id="jarak_{{ $school->id_sekolah }}" class="form-control" value="{{ old('jarak') }}" required>
+                                </div>
+                                <input type="hidden" name="id_sekolah" value="{{ $school->id_sekolah }}">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </form>
+
+                    <a href="{{ $school->link_web }}" class="btn btn-primary mt-2" style="background-color: white; color: #CF0723;" title="Lihat Detail">Lihat Detail</a>
+                </div>
+            </div>
+        </div>
+    @endforeach
+@endif
+
         </div>
     </div>
 </div>

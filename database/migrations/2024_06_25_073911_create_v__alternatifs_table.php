@@ -11,16 +11,16 @@ return new class() extends Migration {
         DB::statement('CREATE OR REPLACE VIEW v_alternatifs AS
         SELECT 
             `homelaun_ilhamhadi`.`users`.`id` AS `id`,
-            `homelaun_ilhamhadi`.`sekolah_places`.`nama_sekolah` AS `nama_sekolah`,
-            `homelaun_ilhamhadi`.`sekolah_places`.`extrakulikuler` AS `c1`,
-            `homelaun_ilhamhadi`.`sekolah_places`.`biaya_bulanan` AS `c2`,
-            `homelaun_ilhamhadi`.`sekolah_places`.`fasilitas` AS `c3`,
-            `homelaun_ilhamhadi`.`sekolah_places`.`akreditasi` AS `c4`,
+            `homelaun_ilhamhadi`.`sekolah_place`.`nama_sekolah` AS `nama_sekolah`,
+            `homelaun_ilhamhadi`.`sekolah_place`.`extrakulikuler` AS `c1`,
+            `homelaun_ilhamhadi`.`sekolah_place`.`biaya_bulanan` AS `c2`,
+            `homelaun_ilhamhadi`.`sekolah_place`.`fasilitas` AS `c3`,
+            `homelaun_ilhamhadi`.`sekolah_place`.`akreditasi` AS `c4`,
             `homelaun_ilhamhadi`.`alternatifs`.`jarak` AS `c5`
         FROM 
-            (`homelaun_ilhamhadi`.`sekolah_places` 
+            (`homelaun_ilhamhadi`.`sekolah_place` 
             JOIN `homelaun_ilhamhadi`.`alternatifs` 
-            ON (`homelaun_ilhamhadi`.`alternatifs`.`sekolah_place_id_sekolah` = `homelaun_ilhamhadi`.`sekolah_places`.`id_sekolah`)) 
+            ON (`homelaun_ilhamhadi`.`alternatifs`.`sekolah_place_id_sekolah` = `homelaun_ilhamhadi`.`sekolah_place`.`id_sekolah`)) 
             JOIN `homelaun_ilhamhadi`.`users` 
             ON (`homelaun_ilhamhadi`.`alternatifs`.`users_id` = `homelaun_ilhamhadi`.`users`.`id`)'
         );

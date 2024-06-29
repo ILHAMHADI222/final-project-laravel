@@ -21,7 +21,7 @@ class SekolahController extends Controller
     public function index()
     {
         // Mengambil semua data dari tabel 'sekolah_places' menggunakan query builder
-        $portfolios = DB::table('sekolah_places')->get();
+        $portfolios = DB::table('sekolah_place')->get();
 
         // Debugging untuk memastikan data yang diambil
         // dd($portfolios);

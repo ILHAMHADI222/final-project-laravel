@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleAuthController; // Import GoogleAuthController
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\JarakController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\VerificationController;
@@ -36,7 +37,7 @@ Route::middleware('guest')->group(function () {
 
 // checkrole
 // Protect the dashboard route with 'auth' middleware
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/dash', [AuthController::class, 'dash'])->name('dash');
     Route::get('/dashboard/user_dashboard', [UserDashboardController::class, 'index'])->name('user_dashboard.index');
     Route::get('/dashboard/user_dashboard/create', [UserDashboardController::class, 'create'])->name('user_dashboard.create');
@@ -50,6 +51,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     Route::get('/user', [SekolahController::class, 'index'])->name('user.index');
     Route::get('/user/mulai_perhitungan', [SekolahController::class, 'mulaiPerhitungan'])->name('user.mulai_perhitungan');
+    Route::post('/simpan_jarak', [JarakController::class, 'simpanJarak'])->name('simpanJarak');
 });
 
 // forgot-password

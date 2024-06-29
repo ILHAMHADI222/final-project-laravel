@@ -150,24 +150,37 @@ class AuthController extends Controller
 
     public function login_auth(Request $request)
     {
+        // Validasi input
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Ambil kredensial
         $credentials = $request->only('email', 'password');
 
-        // Debugging kredensial
-        Log::info('Kredensial: ', ['email' => $credentials['email'], 'password' => $credentials['password']]);
+        // Debugging kredensial yang diterima
+        Log::info('Credentials: ', $credentials);
 
+        // Coba autentikasi pengguna
         if (Auth::attempt($credentials)) {
+            // Regenerasi sesi
             $request->session()->regenerate();
 
-            // Debugging peran pengguna
+            // Ambil peran pengguna
             $userRole = Auth::user()->role;
-            Log::info('Peran Pengguna: ', ['role' => $userRole]);
+            Log::info('User logged in: ', ['role' => $userRole]);
 
+            // Arahkan berdasarkan peran
             if ($userRole == 'admin') {
                 return redirect()->route('dash');
             } else {
-                return redirect()->route('user');
+                return redirect()->route('user.index');
             }
         }
+
+        // Kredensial tidak cocok
+        Log::warning('Login failed for email: '.$request->input('email'));
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',

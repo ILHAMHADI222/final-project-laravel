@@ -20,6 +20,12 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
+
+    // Definisikan relasi ke model Alternatif
+    public function alternatifs()
+    {
+        return $this->hasMany(Alternatif::class, 'users_id');
+    }
     protected $fillable = [
         'name',
         'email',

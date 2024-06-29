@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class SekolahPlace extends Model
 {
-    protected $table = 'sekolah_places';
+    public function alternatifs()
+    {
+        return $this->hasMany(Alternatif::class, 'sekolah_place_id_sekolah');
+    }
+    protected $table = 'sekolah_place';
     protected $primaryKey = 'id_sekolah'; // pastikan ini sesuai dengan nama kolom primary key Anda
 
     protected $fillable = [

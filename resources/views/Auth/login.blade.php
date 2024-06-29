@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="form-group position-relative has-icon-left mb-4 password-container">
-                                <input type="password" name="password" id="password" class="form-control form-control-xl" placeholder="Password">
+                                <input type="password" name="password" id="password" class="form-control form-control-xl" placeholder="password">
                                 <div class="form-control-icon">
                                     <i class="bi bi-shield-lock"></i>
                                 </div>
