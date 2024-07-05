@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SekolahPlace;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB; // Pastikan Anda mengimpor model Sekolah jika digunakan
+use Illuminate\Support\Facades\DB;
 
 class SekolahController extends Controller
 {
@@ -20,13 +20,8 @@ class SekolahController extends Controller
 
     public function index()
     {
-        // Mengambil semua data dari tabel 'sekolah_places' menggunakan query builder
         $portfolios = DB::table('sekolah_place')->get();
 
-        // Debugging untuk memastikan data yang diambil
-        // dd($portfolios);
-
-        // Mengirimkan data ke view 'user.index' menggunakan compact()
         return view('user.index', ['portfolios' => $portfolios]);
     }
 }

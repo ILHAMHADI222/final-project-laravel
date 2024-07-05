@@ -2,14 +2,15 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request; // Pastikan menggunakan Illuminate\Http\Request
 use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
-    public function handle(Request $request, \Closure $next, $role)
+    public function handle($request, \Closure $next, $role)
     {
-        if (!Auth::check() || Auth::user()->role != $role) {
+        if (!Auth::check() || Auth::user()->role !== $role) {
+            \Log::info('User does not have the required role.', ['required' => $role, 'user_role' => Auth::user()->role]);
+
             return redirect('/');
         }
 

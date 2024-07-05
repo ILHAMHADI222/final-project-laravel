@@ -20,6 +20,10 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 
     // Definisikan relasi ke model Alternatif
     public function alternatifs()
@@ -31,6 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'google_id',
+        'role',
         'email_verified_at',
     ];
 
@@ -57,6 +62,9 @@ class User extends Authenticatable implements MustVerifyEmail
 $users = User::all();
 
 foreach ($users as $user) {
-    $user->password = Hash::make($user->password);
-    $user->save();
+    // Hanya meng-hash password jika belum di-hash
+    if (!Hash::needsRehash($user->password)) {
+        $user->password = Hash::make($user->password);
+        $user->save();
+    }
 }

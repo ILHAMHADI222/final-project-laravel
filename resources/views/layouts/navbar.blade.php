@@ -1,27 +1,4 @@
-<div class="container mt-4" style="margin-bottom: 2rem; padding-bottom: 1rem;">
-    <div class="container">
-        <div class="row mt-3 mb-3 justify-content-between align-items-center">
-            <div class="col-auto">
-                <a href="javascript:history.go(-1);" id="submitBtn1" class="btn btn-secondary btn-lg">
-                    <i class="fas fa-arrow-left fa-lg"></i> Back
-                </a>
-            </div>
-            <div class="col-auto">
-                <!-- Tombol "Selanjutnya" dengan form -->
-                <button type="button" id="submitBtn" class="btn btn-success" disabled onclick="submitForm()">Selanjutnya</button>
-                <!-- Form untuk pengisian jarak (akan di-submit saat tombol "Selanjutnya" diklik) -->
-                <form id="jarakForm" action="/simpan_jarak" method="POST" style="display: none;">
-                    @csrf
-                    <input type="hidden" name="school_id" value="{{ $school->id }}">
-                    <div class="mb-3">
-                        <label for="jarak_{{ $school->id }}" class="form-label">Jarak ke sekolah (km)</label>
-                        <input type="text" class="form-control" id="jarak_{{ $school->id }}" name="jarak_{{ $school->id }}" placeholder="Masukkan jarak ke sekolah">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 
     <style>
         .card {
@@ -72,12 +49,5 @@
         }
     </style>
 
-<script>
-    function submitForm() {
-        // Mengambil form untuk pengisian jarak
-        var form = document.getElementById('jarakForm');
-        // Mengirim form
-        form.submit();
-    }
-</script>
+
     

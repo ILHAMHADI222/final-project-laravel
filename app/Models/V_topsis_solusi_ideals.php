@@ -9,7 +9,7 @@ class V_topsis_solusi_ideals extends Model
 {
     use HasFactory;
 
-    protected $table = 'v_topsis_solusi_ideals';
+    protected $table = 'v_topsis_solusi_ideal';
 
     public static function getData()
     {
