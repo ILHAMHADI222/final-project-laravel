@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\GoogleAuthController; // Import GoogleAuthController
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\HasilController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\JarakController;
@@ -10,7 +10,6 @@ use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
 
-// Explicit routes for AuthController methods
 Route::middleware('guest')->group(function () {
     // Routes for registration and dashboard views
     Route::view('/register', 'auth.register');
@@ -25,7 +24,6 @@ Route::middleware('guest')->group(function () {
     Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle'])->name('google-callback');
 });
 
-// Protect user dashboard route with 'auth' and 'verified' middleware
 Route::middleware(['auth', 'verified'])->group(function () {
     // User routes
     Route::middleware('role:user')->group(function () {
@@ -36,11 +34,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/simpan-bobot', [JarakController::class, 'simpanBobot'])->name('simpanBobot');
         Route::get('/user/hasil_result', [HasilController::class, 'index'])->name('user.hasil_result');
         Route::get('/user/hasil', 'HasilController@index')->middleware('role:user');
-        // Add this line
     });
+
     // Admin routes
     Route::middleware('role:admin')->group(function () {
-        Route::get('/dash', [AuthController::class, 'dash'])->name('dash');
+        Route::get('/dash', [AuthController::class, 'admin'])->name('dash');
         Route::get('/dashboard/user_dashboard', [UserDashboardController::class, 'index'])->name('user_dashboard.index');
         Route::get('/dashboard/user_dashboard/create', [UserDashboardController::class, 'create'])->name('user_dashboard.create');
         Route::post('/dashboard/user_dashboard', [UserDashboardController::class, 'store'])->name('user_dashboard.store');
@@ -50,20 +48,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-// forgot-password
 Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot-password');
 Route::post('/forgot-password-act', [AuthController::class, 'forgot_password_act'])->name('forgot-password-act');
-
-// validasi
 Route::get('validasi-forgot-password/{token}', [AuthController::class, 'validasi_forgot_password'])->name('validasi-forgot-password');
 Route::post('/validasi-forgot-password-act', [AuthController::class, 'validasi_forgot_password_act'])->name('validasi-forgot-password-act');
 
-// Protect the dashboard route with 'auth' middleware
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dash', [AuthController::class, 'dash'])->name('dash');
+    Route::get('/dash', [AuthController::class, 'admin'])->name('dash');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::view('/dash', 'dash');
-    // dash
+    Route::view('/dash', 'dashboard_user.index');
     Route::prefix('user_dashboard')->name('dashboard_user.')->group(function () {
         Route::get('/', [UserDashboardController::class, 'index'])->name('index');
         Route::get('/create', [UserDashboardController::class, 'create'])->name('create');
@@ -73,9 +66,9 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/{id_sekolah}', [UserDashboardController::class, 'destroy'])->name('destroy');
     });
 });
+
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
-// email verified
 Route::middleware(['auth'])->group(function () {
     Route::get('email/verify', [VerificationController::class, 'show'])->name('verification.notice');
     Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->middleware(['signed'])->name('verification.verify');

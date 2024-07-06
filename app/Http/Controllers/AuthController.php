@@ -179,12 +179,10 @@ class AuthController extends Controller
             }
         }
 
-        // Kredensial tidak cocok
-        Log::warning('Login failed for email: '.$request->input('email'));
-
+        // Jika autentikasi gagal
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
-        ]);
+        ])->onlyInput('email');
     }
 
     public function logout(Request $request)
@@ -201,8 +199,8 @@ class AuthController extends Controller
         return view('profile');
     }
 
-    public function dash()
+    public function admin()
     {
-        return view('auth.dash');
+        return view('dashboard_user.index');
     }
 }

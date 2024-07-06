@@ -16,6 +16,9 @@ class GoogleAuthController extends Controller
 
     public function callbackGoogle()
     {
+        // Definisikan $userRole di luar blok try-catch
+        $userRole = null;
+
         try {
             $googleUser = Socialite::driver('google')->user();
             $user = User::where('google_id', $googleUser->getId())->first();
@@ -25,7 +28,7 @@ class GoogleAuthController extends Controller
                     'name' => $googleUser->getName(),
                     'email' => $googleUser->getEmail(),
                     'google_id' => $googleUser->getId(),
-                    'role' => 'user',
+                    'role' => 'user', // Sesuaikan role default jika dibutuhkan
                 ]);
 
                 Auth::login($newUser);
@@ -36,17 +39,31 @@ class GoogleAuthController extends Controller
                 Log::info('Existing user logged in.', ['user' => $user]);
             }
 
-            Log::info('User role after login.', ['role' => Auth::user()->role]);
+            // Pastikan role pengguna diakses setelah login berhasil
+            $userRole = Auth::user()->role;
+            Log::info('User role after login.', ['role' => $userRole]);
 
-            if (Auth::user()->role === 'admin') {
-                return redirect()->route('dash');
+            // Redirect berdasarkan role pengguna
+            if ($userRole === 'admin') {
+                return redirect()->route('dashboard_user.index'); // Sesuaikan dengan nama rute untuk dashboard admin
             } else {
                 return redirect()->route('user.index');
             }
         } catch (\Throwable $th) {
-            Log::error('Error during Google callback.', ['error' => $th->getMessage()]);
+            Log::error('Error during Google callback.', [
+                'error' => $th->getMessage(),
+                'trace' => $th->getTraceAsString(), // Sertakan trace untuk debug lebih lanjut
+                'userRole' => $userRole, // Tambahkan userRole ke log untuk membantu debug
+            ]);
 
-            return redirect()->route('index')->withErrors('Terjadi kesalahan. Silakan coba lagi nanti.');
+            // Cek jika kesalahan terjadi karena role admin
+            if ($userRole === 'admin') {
+                // Redirect sesuai kebutuhan untuk admin
+                return redirect()->route('dashboard_user.index')->withErrors('Terjadi kesalahan saat proses callback.');
+            } else {
+                // Redirect untuk pengguna non-admin
+                return redirect()->route('index')->withErrors('Terjadi kesalahan. Silakan coba lagi nanti.');
+            }
         }
     }
 }

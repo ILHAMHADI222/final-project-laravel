@@ -15,21 +15,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory;
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
-    }
-
-    // Definisikan relasi ke model Alternatif
-    public function alternatifs()
-    {
-        return $this->hasMany(Alternatif::class, 'users_id');
-    }
     protected $fillable = [
         'name',
         'email',
@@ -39,32 +24,32 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
-}
-$users = User::all();
 
-foreach ($users as $user) {
-    // Hanya meng-hash password jika belum di-hash
-    if (!Hash::needsRehash($user->password)) {
-        $user->password = Hash::make($user->password);
-        $user->save();
+    // Setter untuk memastikan password di-hash sebelum disimpan
+    public function setPasswordAttribute($password)
+    {
+        if (Hash::needsRehash($password)) {
+            $this->attributes['password'] = Hash::make($password);
+        } else {
+            $this->attributes['password'] = $password;
+        }
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function alternatifs()
+    {
+        return $this->hasMany(Alternatif::class, 'users_id');
     }
 }
