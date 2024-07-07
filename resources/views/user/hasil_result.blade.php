@@ -32,6 +32,20 @@
                 </table>
             @endif
         </div>
+        <div class="container mt-4" style="margin-bottom: 2rem; padding-bottom: 1rem;">
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-auto">
+                                <a href="{{ route('user.index') }}" id="submitBtn1" class="btn btn-success">
+                                <i class="fas fa-arrow-left fa-lg"></i> Ulang Perhitungan
+                                </a>
+                            </div>
+                            <div class="col-auto">
+                            <a href="{{ route('index') }}" id="submitBtn1" class="btn btn-success">
+                                <i class="fas fa-arrow-left fa-lg"></i> Logout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
     </div>
 </div>
 @endsection

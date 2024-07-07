@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password - GoSchool</title>
-    <link rel="stylesheet" href="assets/css/main/app.css">
-    <link rel="stylesheet" href="assets/css/pages/auth.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/main/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pages/auth.css') }}">
     <link rel="shortcut icon" href="{{ asset('src/assets/favicon.ico') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('src/assets/favicon.ico') }}" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
     <form action="{{ route('validasi-forgot-password-act') }}" method="post" id="reset-password-form">
@@ -17,7 +18,7 @@
             <div class="container-fluid h-custom">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-md-9 col-lg-6 col-xl-5">
-                        <img src="src/assets/logo.png" class="img-fluid" alt="Sample image">
+                        <img src="{{ asset('src/assets/logo.png') }}" class="img-fluid" alt="Sample image">
                     </div>
                     <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <div class="divider d-flex flex-column align-items-center my-4">
@@ -30,16 +31,16 @@
                         <small style="color: red; font-size: 16px;">{{ $message }}</small>
                         @enderror
 
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" name="password" class="form-control form-control-xl" placeholder="Password Baru">
-                            <div class="form-control-icon">
-                                <i class="bi bi-key"></i>
+                        <div class="form-group position-relative mb-4">
+                            <input type="password" name="password" id="password" class="form-control form-control-xl" placeholder="Password Baru">
+                            <div class="form-control-icon" onclick="togglePassword('password')">
+                                <span class="password-toggle bi bi-eye-slash"></span>
                             </div>
                         </div>
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" name="confirm_password" class="form-control form-control-xl" placeholder="Konfirmasi Password Baru">
-                            <div class="form-control-icon">
-                                <i class="bi bi-key"></i>
+                        <div class="form-group position-relative mb-4">
+                            <input type="password" name="confirm_password" id="confirm_password" class="form-control form-control-xl" placeholder="Konfirmasi Password Baru">
+                            <div class="form-control-icon" onclick="togglePassword('confirm_password')">
+                                <span class="password-toggle bi bi-eye-slash"></span>
                             </div>
                         </div>
                         <div class="text-center text-lg-start mt-4 pt-2">
@@ -74,6 +75,20 @@
     </div>
 
     <script>
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const fieldType = field.getAttribute('type');
+            if (fieldType === 'password') {
+                field.setAttribute('type', 'text');
+                document.querySelector(`#${fieldId}-toggle`).classList.remove('bi-eye-slash');
+                document.querySelector(`#${fieldId}-toggle`).classList.add('bi-eye');
+            } else {
+                field.setAttribute('type', 'password');
+                document.querySelector(`#${fieldId}-toggle`).classList.remove('bi-eye');
+                document.querySelector(`#${fieldId}-toggle`).classList.add('bi-eye-slash');
+            }
+        }
+
         document.getElementById('reset-password-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent form from submitting directly
 
@@ -108,7 +123,9 @@
                             timer: 3000,
                             width: '300px'
                         }).then(() => {
-                            window.location.href = '/login'; // Redirect after successful submission
+                            // Redirect based on user role
+                            const redirectUrl = '{{ auth()->user() ? (auth()->user()->isAdmin() ? route("dashboard_user.index") : route("user.index")) : route("login") }}';
+                            window.location.href = redirectUrl;
                         });
                     } else {
                         response.json().then(data => {
@@ -137,5 +154,6 @@
             }
         });
     </script>
+
 </body>
 </html>

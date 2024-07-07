@@ -18,60 +18,60 @@
                     <div class="form-group">
                         <label for="w1">Bobot untuk Jarak</label>
                         <select class="form-select mb-3" name="w1" id="w1" aria-label="w1">
-                            <option disabled selected>Bobot untuk Jarak</option>
-                            <option value="1">Sangat Tidak Penting</option>
-                            <option value="2">Tidak Penting</option>
-                            <option value="3">Cukup Penting</option>
-                            <option value="4">Penting</option>
-                            <option value="5">Sangat Penting</option>
+                        <option disabled selected>Apakah Penting untuk Jarak ?</option>
+                        <option value="1">Sangat Tidak Penting Dengan Point 1</option>
+                            <option value="2">Tidak Penting Dengan Point 2 </option>
+                            <option value="3">Cukup Penting Dengan Point 3</option>
+                            <option value="4">Penting Dengan Point 4</option>
+                            <option value="5">Sangat Penting Dengan Point 5</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
                         <label for="w2">Bobot untuk Akreditasi</label>
                         <select class="form-select mb-3" name="w2" id="w2" aria-label="w2">
-                            <option disabled selected>Bobot untuk Akreditasi</option>
-                            <option value="1">Sangat Tidak Penting point 1</option>
-                            <option value="2">Tidak Penting point 2</option>
-                            <option value="3">Cukup Penting point 3</option>
-                            <option value="4">Penting point 4</option>
-                            <option value="5">Sangat Penting point 5</option>
+                            <option disabled selected>Apakah Penting untuk Akreditasi ?</option>
+                            <option value="1">Sangat Tidak Penting Dengan Point 1</option>
+                            <option value="2">Tidak Penting Dengan Point 2 </option>
+                            <option value="3">Cukup Penting Dengan Point 3</option>
+                            <option value="4">Penting Dengan Point 4</option>
+                            <option value="5">Sangat Penting Dengan Point 5</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
                         <label for="w3">Bobot untuk Fasilitas</label>
                         <select class="form-select mb-3" name="w3" id="w3" aria-label="w3">
-                            <option disabled selected>Bobot untuk Fasilitas</option>
-                            <option value="1">Sangat Tidak Penting</option>
-                            <option value="2">Tidak Penting</option>
-                            <option value="3">Cukup Penting</option>
-                            <option value="4">Penting</option>
-                            <option value="5">Sangat Penting</option>
+                            <option disabled selected>Apakah Penting untuk Fasilitas ?</option>
+                            <<option value="1">Sangat Tidak Penting Dengan Point 1</option>
+                            <option value="2">Tidak Penting Dengan Point 2 </option>
+                            <option value="3">Cukup Penting Dengan Point 3</option>
+                            <option value="4">Penting Dengan Point 4</option>
+                            <option value="5">Sangat Penting Dengan Point 5</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
                         <label for="w4">Bobot untuk Biaya Bulanan</label>
                         <select class="form-select mb-3" name="w4" id="w4" aria-label="w4">
-                            <option disabled selected>Bobot untuk Biaya Bulanan</option>
-                            <option value="1">Sangat Tidak Penting</option>
-                            <option value="2">Tidak Penting</option>
-                            <option value="3">Cukup Penting</option>
-                            <option value="4">Penting</option>
-                            <option value="5">Sangat Penting</option>
+                            <option disabled selected>Apakah Penting untuk Biaya Bulanan ?</option>
+                            <option value="1">Sangat Tidak Penting Dengan Point 1</option>
+                            <option value="2">Tidak Penting Dengan Point 2 </option>
+                            <option value="3">Cukup Penting Dengan Point 3</option>
+                            <option value="4">Penting Dengan Point 4</option>
+                            <option value="5">Sangat Penting Dengan Point 5</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
                         <label for="w5">Bobot untuk Ekstrakurikuler</label>
                         <select class="form-select mb-3" name="w5" id="w5" aria-label="w5">
-                            <option disabled selected>Bobot untuk Ekstrakurikuler</option>
-                            <option value="1">Sangat Tidak Penting</option>
-                            <option value="2">Tidak Penting</option>
-                            <option value="3">Cukup Penting</option>
-                            <option value="4">Penting</option>
-                            <option value="5">Sangat Penting</option>
+                            <option disabled selected>Apakah Penting untuk Ekstrakurikuler ?</option>
+                            <option value="1">Sangat Tidak Penting Dengan Point 1</option>
+                            <option value="2">Tidak Penting Dengan Point 2 </option>
+                            <option value="3">Cukup Penting Dengan Point 3</option>
+                            <option value="4">Penting Dengan Point 4</option>
+                            <option value="5">Sangat Penting Dengan Point 5</option>
                         </select>
                     </div>
                     
@@ -79,12 +79,12 @@
                     <div class="container mt-4" style="margin-bottom: 2rem; padding-bottom: 1rem;">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
-                                <a href="{{ route('user.index') }}" class="btn btn-success">
-                                    <i class="fas fa-arrow-left fa-lg"></i> Back
+                                <a href="{{ route('user.mulai_perhitungan') }}" id="submitBtn1" class="btn btn-success">
+                                <i class="fas fa-arrow-left fa-lg"></i> Back
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-success">Simpan Semua</button>
+                                <button type="submit"  id="submitBtn1" class="btn btn-success">Simpan Dan Hitung</button>
                             </div>
                         </div>
                     </div>
