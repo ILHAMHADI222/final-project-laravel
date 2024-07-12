@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Submit</button>
+                            <button type="submit" class="btn btn-lg btn-block" style="background-color: #CF0723; color: white;">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -70,49 +70,49 @@
     </form>
     <script>
         document.getElementById('forgot-password-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah form dari pengiriman langsung
+    event.preventDefault(); // Mencegah form dari pengiriman langsung
 
-            // Asumsikan email berhasil dikirimkan setelah form disubmit
-            fetch(this.action, {
-                method: 'POST',
-                body: new FormData(this)
-            }).then(response => {
-                if (response.ok) {
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'success',
-                        title: 'Email Terkirim!',
-                        text: 'Silahkan check gmail Anda.',
-                        showConfirmButton: true,
-                        timer: 3000,
-                        width: '300px'
-                    });
-                } else {
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'error',
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan, silahkan coba lagi.',
-                        showConfirmButton: true,
-                        timer: 3000,
-                        width: '300px'
-                    });
-                }
-            }).catch(error => {
-                Swal.fire({
-                    position: 'top',
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'Terjadi kesalahan, silahkan coba lagi.',
-                    showConfirmButton: true,
-                    timer: 3000,
-                    width: '300px'
-                });
-            });
+    // Asumsikan email berhasil dikirimkan setelah form disubmit
+    fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // Mengembalikan response sebagai JSON jika sukses
+        }
+        throw new Error('Terjadi kesalahan pada pengiriman email.'); // Melakukan throw error jika tidak OK
+    })
+    .then(data => {
+        // Handle response data
+        Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Email Terkirim!',
+            text: 'Silahkan cek email Anda untuk langkah selanjutnya.',
+            showConfirmButton: true,
+            timer: 3000,
+            width: '300px'
         });
+    })
+    .catch(error => {
+        console.error(error); // Log error ke konsol untuk debugging
+        Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: 'Error!',
+            text: 'Terjadi kesalahan pada pengiriman email. Silakan coba lagi nanti.',
+            showConfirmButton: true,
+            timer: 3000,
+            width: '300px'
+        });
+    });
+});
+
     </script>
 </body>
 
-        </body>
-        </html>
+</body> 
+</html>
+
 

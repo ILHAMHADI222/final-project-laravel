@@ -34,16 +34,21 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="container mt-4" style="margin-bottom: 2rem; padding-bottom: 1rem;">
-        <div class="row justify-content-between align-items-center">
-            <div class="col-auto">
-                <a href={{ route('user.index')}}  id="submitBtn1" class="btn btn-success">
-                    <i class="fas fa-arrow-left fa-lg"></i> Back
-                </a>
-            </div>
-            <div class="col-auto">
-            <button type="submit" id="submitBtn1" class="btn btn-success">Simpan Semua</button>
-            </div>
+
+                    <div class="container mt-4 mb-4">
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-auto">
+                                <a href="{{ route('user.index')}}" id="submitBtn1" class="btn btn-success">
+                                    <i class="fas fa-arrow-left fa-lg"></i> Back
+                                </a>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" id="submitBtn1" class="btn btn-success">Simpan Semua</button>
+                            </div>
+                        </div>
+                    </div>
+
+          
             </div>
                 </form>
             @endif

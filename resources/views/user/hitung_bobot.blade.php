@@ -78,16 +78,17 @@
                     <!-- Submit and Back buttons -->
                     <div class="container mt-4" style="margin-bottom: 2rem; padding-bottom: 1rem;">
                         <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <a href="{{ route('user.mulai_perhitungan') }}" id="submitBtn1" class="btn btn-success">
-                                <i class="fas fa-arrow-left fa-lg"></i> Back
+                            <div class="col-md-6 mb-2 mb-md-0"> <!-- Kolom untuk tombol "Back", diatur agar mengambil setengah lebar pada perangkat besar dan penuh lebar pada perangkat kecil -->
+                                <a href="{{ route('user.mulai_perhitungan') }}" id="submitBtn1" class="btn btn-success>
+                                    <i class="fas fa-arrow-left fa-lg"></i> Back
                                 </a>
                             </div>
-                            <div class="col-auto">
-                                <button type="submit"  id="submitBtn1" class="btn btn-success">Simpan Dan Hitung</button>
+                            <div class="col-md-6"> <!-- Kolom untuk tombol "Simpan Dan Hitung", diatur agar mengambil setengah lebar pada perangkat besar -->
+                                <button type="submit" id="submitBtn1" class="btn btn-success">Simpan Dan Hitung</button>
                             </div>
                         </div>
                     </div>
+
                 </form>
             @endif
         </div>

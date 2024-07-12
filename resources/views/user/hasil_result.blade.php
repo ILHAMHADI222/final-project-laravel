@@ -33,19 +33,20 @@
             @endif
         </div>
         <div class="container mt-4" style="margin-bottom: 2rem; padding-bottom: 1rem;">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <a href="{{ route('user.index') }}" id="submitBtn1" class="btn btn-success">
-                                <i class="fas fa-arrow-left fa-lg"></i> Ulang Perhitungan
-                                </a>
-                            </div>
-                            <div class="col-auto">
-                            <a href="{{ route('index') }}" id="submitBtn1" class="btn btn-success">
-                                <i class="fas fa-arrow-left fa-lg"></i> Logout
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    <div class="row justify-content-between align-items-center">
+        <div class="col-md-6 mb-2 mb-md-0"> <!-- Kolom untuk tombol "Ulang Perhitungan" -->
+            <a href="{{ route('user.index') }}" id="submitBtn1" class="btn btn-success">
+                <i class="fas fa-arrow-left fa-lg"></i> Ulang Perhitungan
+            </a>
+        </div>
+        <div class="col-md-6"> <!-- Kolom untuk tombol "Logout" -->
+            <a href="{{ route('index') }}" id="submitBtn1" class="btn btn-success">
+                <i class="fas fa-arrow-left fa-lg"></i> Logout
+            </a>
+        </div>
+    </div>
+</div>
+
     </div>
 </div>
 @endsection

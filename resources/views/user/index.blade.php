@@ -35,21 +35,22 @@
     </div>
 
     <div class="container mt-4" style="margin-bottom: 2rem; padding-bottom: 1rem;">
-        <div class="row justify-content-between align-items-center">
-            <div class="col-auto">
-                <a href="#"  id="submitBtn1" class="btn btn-success" onclick="goBackAndRefresh()">
-                    <i class="fas fa-arrow-left fa-lg"></i> Pilih Ulang
-                </a>
-            </div>
-            <div class="col-auto">
-                <form id="selectSchoolsForm" action="/user/mulai_perhitungan" method="GET">
-                    @csrf
-                    <input type="hidden" name="selectedIds" id="selectedIds">
-                    <button type="submit" id="submitBtn" class="btn btn-success" disabled>Selanjutnya</button>
-                </form>
-            </div>
+    <div class="row justify-content-between align-items-center">
+        <div class="col-auto mb-2 mb-md-0"> <!-- Menambahkan mb-2 untuk margin-bottom pada perangkat kecil dan mb-md-0 untuk margin-bottom nol pada perangkat sedang dan besar -->
+            <a href="#" id="submitBtn1" class="btn btn-success" onclick="goBackAndRefresh()">
+                <i class="fas fa-arrow-left fa-lg"></i> Pilih Ulang
+            </a>
+        </div>
+        <div class="col-auto"> <!-- Menambahkan class col-auto untuk ukuran kolom otomatis -->
+            <form id="selectSchoolsForm" action="/user/mulai_perhitungan" method="GET">
+                @csrf
+                <input type="hidden" name="selectedIds" id="selectedIds">
+                <button type="submit" id="submitBtn" class="btn btn-success" disabled>Selanjutnya</button>
+            </form>
         </div>
     </div>
+</div>
+
 
     <style>
         .card {

@@ -30,7 +30,7 @@ class VerificationController extends Controller
 
         // Redirect based on user role after email verification
         if ($user->role === 'admin') {
-            return redirect()->route('dash')->with('success', 'Email berhasil diverifikasi!');
+            return redirect()->route('dashboard_user.index')->with('success', 'Email berhasil diverifikasi!');
         } else {
             return redirect()->route('user.index')->with('success', 'Email berhasil diverifikasi!');
         }

@@ -27,7 +27,7 @@ class AuthController extends Controller
 
     public function forgot_password()
     {
-        return view('auth.forgot-password');
+        return view('Auth.forgot-password');
     }
 
     public function forgot_password_act(Request $request)
